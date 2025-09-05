@@ -25,6 +25,7 @@ namespace DescApp
         private bool isSpining = false;
         private long balance = 500;
 
+
         private readonly List<string> photos = new List<string>
         {
             "https://cdn4.iconfinder.com/data/icons/glands/3500/banana_slot_gambling_casino-512.png",
@@ -44,7 +45,7 @@ namespace DescApp
             Spin();
         }
 
-        private async  void Btn_Slots(object sender, RoutedEventArgs e)
+        private async void Btn_Slots(object sender, RoutedEventArgs e)
         {
             int bet = 50;
             int loseMoney = 50;
@@ -54,18 +55,13 @@ namespace DescApp
 
             var random = new Random();
             bool win = random.Next(0, 2) == 1; // 40% шанса
-            bool lost = random.Next(0,2) == 1;
-
             if (win)
             {
                 int prize = 200;
                 balance += prize;
                 MessageBox.Show($"you won {prize}");
             }
-            else
-            {
-                MessageBox.Show("u lost");
-            }
+
             if (isSpining) return;
             isSpining = true;
 
@@ -75,7 +71,7 @@ namespace DescApp
             isSpining = false;
             ShowBalance();
         }
-        
+
 
         private void Spin()
         {
@@ -100,7 +96,7 @@ namespace DescApp
                 {
                     ResultText.Text = "🎉 Джекпот!";
                 }
-                else if (img1 == img2 || img2 == img3 || img1 == img3 )
+                else if (img1 == img2 || img2 == img3 || img1 == img3)
                 {
                     ResultText.Text = "почти совпали";
                 }
@@ -109,7 +105,7 @@ namespace DescApp
                     ResultText.Text = "Good luck for next time => Status {defeat}";
                 }
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 MessageBox.Show($"error loading images  {err.Message}");
             }
@@ -120,11 +116,16 @@ namespace DescApp
         {
             var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(host , UriKind.Absolute);
+            bitmapImage.UriSource = new Uri(host, UriKind.Absolute);
             bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
             bitmapImage.EndInit();
             return bitmapImage;
-        } 
+        }
+
+        private void BetInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
 
